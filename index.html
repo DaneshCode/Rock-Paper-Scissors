@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <h1>✨ Rock Paper Scissors ✨</h1>
+    <div class="choice">
+      <section class="human">
+        <h2>Your Choice : <span id="playerChoice">?</span></h2>
+        <div class="buttons">
+          <button class="Rock" onclick="choice('Rock')" aria-label="Rock">
+            <i class="fa-regular fa-hand-back-fist"></i>
+          </button>
+          <button class="Paper" onclick="choice('Paper')" aria-label="Paper">
+            <i class="fa-regular fa-hand"></i>
+          </button>
+          <button
+            class="Scissors"
+            onclick="choice('Scissors')"
+            aria-label="Scissors"
+          >
+            <i class="fa-regular fa-hand-scissors"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="computer">
+        <h2>Computer's Choice : <span id="computerChoice">?</span></h2>
+        <div class="choices"></div>
+      </section>
+
+      <h2 id="result">Make your choice!</h2>
+      <br /><br />
+      <h2 id="playerScore">Player Score: 0</h2>
+      <h2 id="computerScore">Computer Score: 0</h2>
+    </div>
+  </body>
+  <script src="./app.js"></script>
+</html>

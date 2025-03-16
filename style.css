@@ -1,0 +1,152 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.choice {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  width: min(90%, 600px);
+  margin: 0 auto;
+}
+
+.human,
+.computer {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+h2 {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.human button {
+  all: unset;
+  cursor: pointer;
+  margin: 0.5rem;
+  padding: clamp(0.5rem, 3vw, 1rem);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.human button:hover {
+  transform: scale(1.2);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.human button i,
+.computer i {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: white;
+}
+
+#playerChoice,
+#computerChoice,
+#result {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: all 0.5s ease;
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+}
+
+#playerChoice.show,
+#computerChoice.show,
+#result.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#result {
+  margin-top: 1rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+#playerScore,
+#computerScore {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+  transition: all 0.3s ease;
+}
+
+#playerScore {
+  color: #98fb98;
+}
+
+#computerScore {
+  color: #ffa07a;
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+  .choice {
+    padding: 0.5rem;
+  }
+
+  .human,
+  .computer {
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .buttons {
+    gap: 0.5rem;
+  }
+
+  #playerScore,
+  #computerScore {
+    margin: 0.3rem;
+    padding: 0.3rem 0.6rem;
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .choice {
+    padding: 2rem;
+  }
+
+  .human,
+  .computer {
+    margin: 2rem;
+    padding: 1.5rem;
+  }
+}
