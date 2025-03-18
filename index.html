@@ -3,11 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Modern Rock Paper Scissors Game" />
+    <meta name="theme-color" content="#667eea" />
     <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
@@ -15,37 +19,39 @@
     <title>Rock Paper Scissors</title>
   </head>
   <body>
-    <h1>✨ Rock Paper Scissors ✨</h1>
-    <div class="choice">
-      <section class="human">
-        <h2>Your Choice : <span id="playerChoice">?</span></h2>
-        <div class="buttons">
-          <button class="Rock" onclick="choice('Rock')" aria-label="Rock">
-            <i class="fa-regular fa-hand-back-fist"></i>
-          </button>
-          <button class="Paper" onclick="choice('Paper')" aria-label="Paper">
-            <i class="fa-regular fa-hand"></i>
-          </button>
-          <button
-            class="Scissors"
-            onclick="choice('Scissors')"
-            aria-label="Scissors"
-          >
-            <i class="fa-regular fa-hand-scissors"></i>
-          </button>
+    <main>
+      <h1>✨ Rock Paper Scissors ✨</h1>
+      <div class="choice">
+        <section class="human">
+          <h2>Your Choice: <output id="playerChoice">?</output></h2>
+          <div class="buttons">
+            <button class="Rock" data-choice="Rock" aria-label="Rock">
+              <i class="fa-regular fa-hand-back-fist"></i>
+            </button>
+            <button class="Paper" data-choice="Paper" aria-label="Paper">
+              <i class="fa-regular fa-hand"></i>
+            </button>
+            <button
+              class="Scissors"
+              data-choice="Scissors"
+              aria-label="Scissors"
+            >
+              <i class="fa-regular fa-hand-scissors"></i>
+            </button>
+          </div>
+        </section>
+
+        <section class="computer">
+          <h2>Computer's Choice: <output id="computerChoice">?</output></h2>
+        </section>
+
+        <output id="result" aria-live="polite">Make your choice!</output>
+        <div class="scores">
+          <output id="playerScore">Player Score: 0</output>
+          <output id="computerScore">Computer Score: 0</output>
         </div>
-      </section>
-
-      <section class="computer">
-        <h2>Computer's Choice : <span id="computerChoice">?</span></h2>
-        <div class="choices"></div>
-      </section>
-
-      <h2 id="result">Make your choice!</h2>
-      <br /><br />
-      <h2 id="playerScore">Player Score: 0</h2>
-      <h2 id="computerScore">Computer Score: 0</h2>
-    </div>
+      </div>
+    </main>
+    <script src="./app.js" type="module"></script>
   </body>
-  <script src="./app.js"></script>
 </html>

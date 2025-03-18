@@ -1,87 +1,97 @@
-function choice(playerChoice) {
-  const choices = ['Rock', 'Paper', 'Scissors'];
-  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+const CHOICES = ['Rock', 'Paper', 'Scissors'];
+const WINNING_SCORE = 5;
 
-  // Reset previous state
-  const elements = ['playerChoice', 'computerChoice', 'result'].map((id) =>
-    document.getElementById(id),
-  );
-  elements.forEach((el) => {
-    el.classList.remove('show');
-    el.style.transform = 'translateY(20px)';
-  });
+class Game {
+  constructor() {
+    this.scores = { player: 0, computer: 0 };
+    this.elements = {
+      player: document.getElementById('playerChoice'),
+      computer: document.getElementById('computerChoice'),
+      result: document.getElementById('result'),
+      playerScore: document.getElementById('playerScore'),
+      computerScore: document.getElementById('computerScore')
+    };
+    this.initializeGame();
+  }
 
-  // Animate player choice
-  setTimeout(() => {
-    elements[0].innerText = playerChoice;
-    elements[0].classList.add('show');
-    elements[0].style.transform = 'translateY(0)';
-  }, 300);
+  initializeGame() {
+    document.querySelectorAll('.buttons button').forEach(button => {
+      button.addEventListener('click', () => this.handleChoice(button.dataset.choice));
+    });
+  }
 
-  // Animate computer choice
-  setTimeout(() => {
-    elements[1].innerText = computerChoice;
-    elements[1].classList.add('show');
-    elements[1].style.transform = 'translateY(0)';
-  }, 800);
+  async handleChoice(playerChoice) {
+    const computerChoice = CHOICES[Math.floor(Math.random() * CHOICES.length)];
 
-  // Update scores and show result
-  setTimeout(() => {
-    const result = getResult(playerChoice, computerChoice);
-    elements[2].innerHTML = result;
-    elements[2].classList.add('show');
-    elements[2].style.transform = 'translateY(0)';
+    this.resetAnimations();
+    await this.animateChoices(playerChoice, computerChoice);
+    this.updateScores(playerChoice, computerChoice);
+  }
 
-    // Update scores based on result
-    updateScores(playerChoice, computerChoice);
-  }, 1300);
+  resetAnimations() {
+    Object.values(this.elements).forEach(el => {
+      if (el.id !== 'playerScore' && el.id !== 'computerScore') {
+        el.classList.remove('show');
+        el.style.transform = 'translateY(20px)';
+      }
+    });
+  }
+
+  async animateChoices(playerChoice, computerChoice) {
+    await this.animate(this.elements.player, playerChoice, 300);
+    await this.animate(this.elements.computer, computerChoice, 500);
+
+    const result = this.getResult(playerChoice, computerChoice);
+    await this.animate(this.elements.result, result, 500);
+  }
+
+  animate(element, text, delay) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        element.textContent = text;
+        element.classList.add('show');
+        element.style.transform = 'translateY(0)';
+        resolve();
+      }, delay);
+    });
+  }
+
+  getResult(playerChoice, computerChoice) {
+    if (playerChoice === computerChoice) return '🤝 Draw!';
+
+    const winConditions = {
+      Rock: 'Scissors',
+      Paper: 'Rock',
+      Scissors: 'Paper'
+    };
+
+    return winConditions[playerChoice] === computerChoice ? '🎉 You Win!' : '💔 You Lose!';
+  }
+
+  updateScores(playerChoice, computerChoice) {
+    if (playerChoice === computerChoice) return;
+
+    const playerWins = this.getResult(playerChoice, computerChoice).includes('Win');
+    this.scores[playerWins ? 'player' : 'computer']++;
+
+    this.updateScoreDisplay();
+    this.checkGameEnd();
+  }
+
+  updateScoreDisplay() {
+    this.elements.playerScore.textContent = `Player Score: ${this.scores.player}`;
+    this.elements.computerScore.textContent = `Computer Score: ${this.scores.computer}`;
+  }
+
+  checkGameEnd() {
+    if (this.scores.player === WINNING_SCORE || this.scores.computer === WINNING_SCORE) {
+      const winner = this.scores.player === WINNING_SCORE ? '🎉 You Win' : '💔 You Lose';
+      this.elements.result.textContent = `${winner} the Game!`;
+      this.scores.player = this.scores.computer = 0;
+      this.updateScoreDisplay();
+    }
+  }
 }
 
-function getResult(playerChoice, computerChoice) {
-  if (playerChoice === computerChoice) return '🤝 Draw !';
-  if (
-    (playerChoice === 'Rock' && computerChoice === 'Scissors') ||
-    (playerChoice === 'Paper' && computerChoice === 'Rock') ||
-    (playerChoice === 'Scissors' && computerChoice === 'Paper')
-  ) {
-    return '🎉 You Win !';
-  }
-  return '💔 You Lose !';
-}
-
-let humanScore = 0;
-let computerScore = 0;
-const humanScoreElement = document.getElementById('playerScore');
-const computerScoreElement = document.getElementById('computerScore');
-
-function updateScores(playerChoice, computerChoice) {
-  if (playerChoice === computerChoice) {
-    return;
-  }
-  if (
-    (playerChoice === 'Rock' && computerChoice === 'Scissors') ||
-    (playerChoice === 'Paper' && computerChoice === 'Rock') ||
-    (playerChoice === 'Scissors' && computerChoice === 'Paper')
-  ) {
-    humanScore++;
-  } else {
-    computerScore++;
-  }
-
-  // Update score display
-  humanScoreElement.textContent = `Player Score: ${humanScore}`;
-  computerScoreElement.textContent = `Computer Score: ${computerScore}`;
-
-  if (humanScore === 5) {
-    document.getElementById('result').innerHTML = '🎉 You Win the Game !';
-    resetGame();
-  }
-  if (computerScore === 5) {
-    document.getElementById('result').innerHTML = '💔 You Lose the Game !';
-    resetGame();
-  }
-  function resetGame() {
-    humanScore = 0;
-    computerScore = 0;
-  }
-}
+// Initialize game when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => new Game());
