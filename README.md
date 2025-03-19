@@ -44,7 +44,7 @@ Experience the sleek design with:
 
 ## 💻 Live Demo
 
-You can view the live demo of the calculator by clicking the link below:
+You can view the live demo of the Rock Paper Scissors game! by clicking the link below:
 
 <a href="https://daneshcode.github.io/Rock-Paper-Scissors/" target="_blank">🔗 Open Rock Paper Scissors game!</a>
 
