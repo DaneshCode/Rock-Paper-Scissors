@@ -12,7 +12,6 @@
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
-  --timer-color: #ff9800;
 }
 
 * {
@@ -40,41 +39,6 @@ h1 {
   margin-bottom: var(--spacing-lg);
   font-size: clamp(1.5rem, 5vw, 2.5rem);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.game-settings {
-  display: flex;
-  gap: var(--spacing-sm);
-  justify-content: center;
-  margin-bottom: var(--spacing-md);
-}
-
-#difficulty {
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
-  background: var(--white-alpha-10);
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-#timer {
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
-  background: var(--white-alpha-10);
-  color: var(--timer-color);
-}
-
-#roundInfo {
-  color: #87ceeb;
-}
-
-.high-score {
-  margin-top: var(--spacing-sm);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  background: var(--white-alpha-10);
-  border-radius: var(--border-radius-sm);
-  color: gold;
 }
 
 .choice {
@@ -168,6 +132,26 @@ i {
 }
 #computerScore {
   color: var(--computer-color);
+}
+
+.made {
+  padding: 2rem 0 1rem 0;
+  text-align: center;
+}
+.made a > i {
+  font-size: x-large;
+}
+
+.made a {
+  color: var(--computer-color);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.3rem;
+}
+
+.made a:hover {
+  color: #e07a52;
+  text-decoration: underline;
 }
 
 /* Media Queries */
